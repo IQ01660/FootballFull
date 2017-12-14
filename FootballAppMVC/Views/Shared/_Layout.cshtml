@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FootballAppMVC.Models.MainMenu>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Syncopate" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/index.css">
+    <link rel="stylesheet" href="~/Content/login.css">
+    <link rel="stylesheet" href="~/Content/register.css">
+    <title>Football App | @ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+        @RenderBody()
+    <!--**************-->
+    <!--The JS Scripts-->
+    <!--**************-->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+
+    <script src="~/Scripts/index.js"></script>
+    <script src="~/Scripts/login.js"></script>
+    <script src="~/Scripts/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿@using FootballAppMVC.Controllers
+@using FootballAppMVC.Models
+@model  List<MainMenu>
+@{
+    ViewBag.Title = "AllGames";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="navbar navbar-inverse" style="background-color: #043687; margin-bottom:0px; border:none; border-radius:0px;">
+    <div class="container-fluid">
+        <div class="navbar-header navTitle">
+            <button type="button" class="navSlideBtn navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand " href="#"><i class="fa fa-futbol-o" aria-hidden="true"></i> Football App</a>
+        </div>
+        <div class="collapse navbar-collapse mainNav" id="myNavbar">
+            <ul class="nav navbar-nav">
+
+                @foreach (var navElem in Model)
+                {
+                    if (navElem.Availabilty == true)
+                    {
+                        <li>@Html.ActionLink(navElem.Text, navElem.Link, navElem.Text)</li>
+                    }
+                }
+
+            </ul>
+            @if (ViewBag.curUser == "")
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Sign Up", "SignUp", "Register")</li>
+                    <li>@Html.ActionLink("Login", "EnterSystem", "Login")</li>
+                </ul>
+            }
+            @if (!(ViewBag.curUser == ""))
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a>Hello, @ViewBag.curUser</a></li>
+                    <li>@Html.ActionLink("Logout", "Exit", "Logout")</li>
+                </ul>
+            }
+
+        </div>
+    </div>
+</nav>
+<div class="dropdownNav">
+    <ul>
+        @foreach (var navElem in Model)
+        {
+            if (navElem.Availabilty == true)
+            {
+                <li>@Html.ActionLink(navElem.Text, navElem.Link, navElem.Text)</li>
+            }
+        }
+        @if (ViewBag.curUser == "")
+            {
+            <li>@Html.ActionLink("Sign Up", "SignUp", "Register")</li>
+            <li style="border-bottom:none ">@Html.ActionLink("Login", "EnterSystem", "Login")</li>
+        }
+        @if (!(ViewBag.curUser == ""))
+            {
+            <li><a>Hello, @ViewBag.curUser</a></li>
+            <li style="border-bottom:none ">@Html.ActionLink("Logout", "Exit", "Logout")</li>
+        }
+    </ul>
+</div>
+<style>
+    .newGamePart form .newGameBtn {
+        outline: none;
+        color: white;
+        text-decoration: none;
+        width: 100%;
+    }
+    /*games table css below*/
+    #allGamesTable {
+        margin-top:80px;
+    }
+    #allGamesTable .container table thead tr {
+        background:#043687;
+        color:white;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 1.3em;
+    }
+        
+    #allGamesTable .container table tbody tr td {
+        padding: 30px 8px;
+        color:#043687;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 1.3em;
+    } 
+    #allGamesTable .container table tbody tr td a {
+        color:#a409bc;
+    }
+</style>
+<!--Nav Bar ENDS-->
+<div class="newGamePart" style="text-align:center">
+    <h1 style="color: #1fa67b;font-size: 18px;text-align: center;font-weight: bold;padding-bottom: 20px;">Create New Game</h1>
+    <form method="get" action="NewGame">
+        <button type="submit" class="btn btn-success newGameBtn" style="text-align:center;width:40%; border-radius:4px;border:none;padding:10px 16px;color: #fff; background-color: #1fa67b;">New Game</button>
+    </form>
+</div>
+<!--New game button ends-->
+
+<!--************************-->
+
+<!--List of all games begins-->
+<section id="allGamesTable">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>GameName</th>
+                    <th>Date</th>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                    <th>Gate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in ViewBag.allGamesList)
+                {
+                    <tr class="active">
+                        <td>@game.Name</td>
+                        <td>@game.Date</td>
+                        @foreach (var team in ViewBag.allTeamsList)
+                        {
+                            if (team.Id == game.Team1_id)
+                            {
+                                <td>@team.Name</td>
+                            }
+                        }
+                        @foreach (var team in ViewBag.allTeamsList)
+                        {
+                            if (team.Id == game.Team2_id)
+                            {
+                                <td>@team.Name</td>
+                            }
+                        }
+                        <td>@Html.ActionLink("Enter","EditGame","Games",new { id = game.Id},null)</td>                      
+                    </tr>
+                }                
+            </tbody>
+        </table>
+    </div>
+</section>

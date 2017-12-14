@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FootDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Team1_id" Type="Int32" Nullable="false" />
+    <Property Name="Team2_id" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Score" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Team" Relationship="Self.FK_Games_Team1" FromRole="Games" ToRole="Team" />
+    <NavigationProperty Name="Team1" Relationship="Self.FK_Games_Team2" FromRole="Games" ToRole="Team" />
+    <NavigationProperty Name="UserAndGamesPivot" Relationship="Self.FK_UserAndGamesPivot_Games" FromRole="Games" ToRole="UserAndGamesPivot" />
+  </EntityType>
+  <EntityType Name="MainMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Availabilty" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Goals" Type="Int32" />
+    <NavigationProperty Name="Games" Relationship="Self.FK_Games_Team1" FromRole="Team" ToRole="Games" />
+    <NavigationProperty Name="Games1" Relationship="Self.FK_Games_Team2" FromRole="Team" ToRole="Games" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Wins" Type="Int32" Nullable="false" />
+    <Property Name="Loses" Type="Int32" Nullable="false" />
+    <Property Name="Draws" Type="Int32" Nullable="false" />
+    <Property Name="Goals" Type="Int32" Nullable="false" />
+    <Property Name="Likes" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserAndGamesPivot" Relationship="Self.FK_UserAndGamesPivot_User" FromRole="User" ToRole="UserAndGamesPivot" />
+  </EntityType>
+  <EntityType Name="UserAndGamesPivot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_id" Type="Int32" Nullable="false" />
+    <Property Name="Game_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Games" Relationship="Self.FK_UserAndGamesPivot_Games" FromRole="UserAndGamesPivot" ToRole="Games" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserAndGamesPivot_User" FromRole="UserAndGamesPivot" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Games_Team1">
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Team1_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Games_Team2">
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="Team2_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAndGamesPivot_Games">
+    <End Role="Games" Type="Self.Games" Multiplicity="1" />
+    <End Role="UserAndGamesPivot" Type="Self.UserAndGamesPivot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Games">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAndGamesPivot">
+        <PropertyRef Name="Game_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAndGamesPivot_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserAndGamesPivot" Type="Self.UserAndGamesPivot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAndGamesPivot">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FootDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Games" EntityType="Self.Games" />
+    <EntitySet Name="MainMenu" EntityType="Self.MainMenu" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Team" EntityType="Self.Team" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserAndGamesPivot" EntityType="Self.UserAndGamesPivot" />
+    <AssociationSet Name="FK_Games_Team1" Association="Self.FK_Games_Team1">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Games_Team2" Association="Self.FK_Games_Team2">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAndGamesPivot_Games" Association="Self.FK_UserAndGamesPivot_Games">
+      <End Role="Games" EntitySet="Games" />
+      <End Role="UserAndGamesPivot" EntitySet="UserAndGamesPivot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAndGamesPivot_User" Association="Self.FK_UserAndGamesPivot_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserAndGamesPivot" EntitySet="UserAndGamesPivot" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

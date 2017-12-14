@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "NewGameForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="login" style="background:#043687">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-wrap">
+                    <h1>Enter the new details of your game</h1>
+                    <form role="form" action="NewGame" method="post" id="login-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="gameName" class="sr-only">Email</label>
+                            <input type="text" name="gameName" id="gameName" class="form-control" placeholder="Game Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamFir" class="sr-only">Email</label>
+                            <input type="text" name="teamFir" id="teamFir" class="form-control" placeholder="Enter Team 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamSec" class="sr-only">Password</label>
+                            <input type="text" name="teamSec" id="teamSec" class="form-control" placeholder="Enter Team 2">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameDate" class="sr-only">Password</label>
+                            <input type="text" name="gameDate" id="gameDate" class="form-control" placeholder="YYYY-MM-DD">
+                        </div>
+
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Create the Game">
+                    </form>
+                    @*<a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>*@
+                    <hr>
+                </div>
+            </div> <!-- /.col-xs-12 -->
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</section>
+

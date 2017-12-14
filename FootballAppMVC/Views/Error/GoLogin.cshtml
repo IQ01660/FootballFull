@@ -1,0 +1,71 @@
+﻿@using FootballAppMVC.Controllers
+@using FootballAppMVC.Models
+@model  List<MainMenu>
+@{
+    ViewBag.Title = "GoLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="navbar navbar-inverse" style="background-color: #043687; margin-bottom:0px; border:none; border-radius:0px;">
+    <div class="container-fluid">
+        <div class="navbar-header navTitle">
+            <button type="button" class="navSlideBtn navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand " href="#"><i class="fa fa-futbol-o" aria-hidden="true"></i> Football App</a>
+        </div>
+        <div class="collapse navbar-collapse mainNav" id="myNavbar">
+            <ul class="nav navbar-nav">
+
+                @foreach (var navElem in Model)
+                {
+                    if (navElem.Availabilty == true)
+                    {
+                        <li>@Html.ActionLink(navElem.Text, navElem.Link, navElem.Text)</li>
+                    }
+                }
+
+            </ul>
+            @if (ViewBag.curUser == "")
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Sign Up", "SignUp", "Register")</li>
+                    <li>@Html.ActionLink("Login", "EnterSystem", "Login")</li>
+                </ul>
+            }
+            @if (!(ViewBag.curUser == ""))
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a>Hello, @ViewBag.curUser</a></li>
+                    <li>@Html.ActionLink("Logout", "Exit", "Logout")</li>
+                </ul>
+            }
+
+        </div>
+    </div>
+</nav>
+<div class="dropdownNav">
+    <ul>
+        @foreach (var navElem in Model)
+        {
+            if (navElem.Availabilty == true)
+            {
+                <li>@Html.ActionLink(navElem.Text, navElem.Link, navElem.Text)</li>
+            }
+        }
+        @if (ViewBag.curUser == "")
+            {
+            <li>@Html.ActionLink("Sign Up", "SignUp", "Register")</li>
+            <li style="border-bottom:none ">@Html.ActionLink("Login", "EnterSystem", "Login")</li>
+        }
+        @if (!(ViewBag.curUser == ""))
+            {
+            <li><a>Hello, @ViewBag.curUser</a></li>
+            <li style="border-bottom:none ">@Html.ActionLink("Logout", "Exit", "Logout")</li>
+        }
+    </ul>
+</div>
+<h2>You have to @Html.ActionLink("Login", "EnterSystem", "Login") first!</h2>
+<h3>Do not have an account? @Html.ActionLink("Sign Up", "SignUp", "Register") at the website</h3>
+
