@@ -8,6 +8,10 @@ using FootballAppMVC.Controllers;
 
 namespace FootballAppMVC.Controllers
 {
+    public class EditGameIdHolder
+    {
+        static public int currentEditGameId = 0;
+    }
     public class GamesController : Controller
     {
         FootDbEntities myTables = new FootDbEntities();
@@ -62,7 +66,45 @@ namespace FootballAppMVC.Controllers
             ViewBag.curUser = CurrentUserHolder.currentUsername;
             // menu items
             List<MainMenu> menuItems = myTables.MainMenu.ToList();
+            // the game id
+            ViewBag.gameId = id;
+            EditGameIdHolder.currentEditGameId = id;
+            // all games list
+            List<Games> allGames = myTables.Games.ToList();
+            ViewBag.allGamesList = allGames;
+            // all teams list
+            List<Team> teamsList = myTables.Team.ToList();
+            ViewBag.allTeamsList = teamsList;
+            // all games and users pivot list
+            List<UserAndGamesPivot> usersGamesList = myTables.UserAndGamesPivot.ToList();
+            ViewBag.allUsersGamesList = usersGamesList;
+            // all users list
+            List<User> userList = myTables.User.ToList();
+            ViewBag.allUserList = userList;
             return View(menuItems);
+        }
+        
+        public ActionResult AddPlayer()
+        {
+            List<User> userList = myTables.User.ToList();
+            ViewBag.allUserList = userList;
+            if (CurrentUserHolder.currentUsername == "")
+            {
+                return RedirectToAction("GoLogin","Error");
+            }
+            UserAndGamesPivot newPlayer = new UserAndGamesPivot();
+            foreach (var user in userList)
+            {
+                if (user.Username == CurrentUserHolder.currentUsername)
+                {
+                    newPlayer.User_id = user.Id;
+                    newPlayer.Game_id = EditGameIdHolder.currentEditGameId;
+                    myTables.UserAndGamesPivot.Add(newPlayer);
+                    break;
+                }
+            }
+            myTables.SaveChanges();
+            return RedirectToAction("EditGame","Games",new { id = EditGameIdHolder.currentEditGameId});
         }
     }
 }

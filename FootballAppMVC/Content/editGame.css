@@ -1,0 +1,15 @@
+﻿@media only screen and (max-width:1050px){
+    #editGame .container .row .col-xs-12 img {
+        display:none !important;
+    }
+    #editGame .container .row .col-xs-12 .gameInfo .gameTitle div {
+        width:30% !important;
+        padding-left:10px !important;
+        text-align:center;
+
+    }
+}
+body {
+
+}
+

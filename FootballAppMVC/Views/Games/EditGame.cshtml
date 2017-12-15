@@ -68,16 +68,103 @@
 </div>
 <!--Editing the game-->
 <style>
+    .addBtn a{
+        color:white;
+    }
+    #editGame .container .row .col-xs-12 .gameInfo .gameTitle {
+        display:block;
+    }
     #editGame .container .row .col-xs-12 img {
         width:38%;
         margin-top:20px;
+    }
+    #editGame .container .row .col-xs-12 .gameInfo .gameTitle div {
+        margin-top:20px;
+        display:inline-block;
+        font-size:1.8em;
+        background: #043687;
+        color:white;
+        font-family: 'Open Sans Condensed', sans-serif;
+        padding:10px 40px;
+        width:25%;
+        text-align:center;
     }
 </style>
 <section id="editGame">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <img class="pull-right" src="~/Images/pitch-clipart-football_pitch.jpg" alt="footballPitch" />
+                @*<img class="pull-right" src="~/Images/pitch-clipart-football_pitch.jpg" alt="footballPitch" />*@
+                <div class="gameInfo">
+                    <div class="gameTitle">
+                        @foreach (var game in ViewBag.allGamesList)
+                        {
+                            if (game.Id == ViewBag.gameId)
+                            {
+                                foreach (var team in ViewBag.allTeamsList)
+                                {
+                                    if (game.Team1_id == team.Id)
+                                    {
+                                        <div>@team.Name</div>
+                                    }
+                                }
+                                
+                                foreach (var team in ViewBag.allTeamsList)
+                                {
+                                    if (game.Team2_id == team.Id)
+                                    {
+                                        <div>@team.Name</div>
+                                    }
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="players" style="margin-top:30px">
+                        <section id="allPlayersTable">
+                            <div class="container" style="padding-left:0">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color:white;background:#043687; font-family:'Open Sans Condensed', sans-serif; font-size:1.3em">
+                                            <th>Players</th>
+                                            <th>Age</th>
+                                            <th>Sex</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var game in ViewBag.allGamesList)
+                                        {
+                                            // finding the correct game
+                                            if (game.Id == ViewBag.gameId)
+                                            {
+                                                // finding correct users - players
+                                                foreach (var usersGames in ViewBag.allUsersGamesList)
+                                                {
+                                                    if (usersGames.Game_id == game.Id)
+                                                    {
+                                                        foreach (var user in ViewBag.allUserList)
+                                                        {
+                                                            if (user.Id == usersGames.User_id)
+                                                            {
+                                                                <tr>
+                                                                    <td>@user.Username</td>
+                                                                    <td>@user.Age</td>
+                                                                    <td>@user.Sex</td>
+                                                                    <td>@user.Email</td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn-success addBtn">@Html.ActionLink("Add me to the gamelist","AddPlayer","Games")</button>
+                </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->
     </div> <!-- /.container -->

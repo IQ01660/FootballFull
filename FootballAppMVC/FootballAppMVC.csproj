@@ -248,6 +248,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\editGame.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\register.css" />
