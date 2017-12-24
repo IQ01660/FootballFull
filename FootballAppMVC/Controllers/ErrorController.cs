@@ -10,9 +10,21 @@ namespace FootballAppMVC.Controllers
 {
     public class ErrorController : Controller
     {
-        FootDbEntities myTables = new FootDbEntities();
+        FootballAppEntitiesTeamVersion myTables = new FootballAppEntitiesTeamVersion();
         // GET: Error/GoLogin
         public ActionResult GoLogin()
+        {
+            ViewBag.curUser = CurrentUserHolder.currentUsername;
+            List<MainMenu> menuItems = myTables.MainMenu.ToList();
+            return View(menuItems);
+        }
+        public ActionResult IncorrectLogin()
+        {
+            ViewBag.curUser = CurrentUserHolder.currentUsername;
+            List<MainMenu> menuItems = myTables.MainMenu.ToList();
+            return View(menuItems);
+        }
+        public ActionResult IncorrectSignUp()
         {
             ViewBag.curUser = CurrentUserHolder.currentUsername;
             List<MainMenu> menuItems = myTables.MainMenu.ToList();

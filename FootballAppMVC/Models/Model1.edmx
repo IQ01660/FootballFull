@@ -67,6 +67,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_id" Type="int" Nullable="false" />
           <Property Name="Game_id" Type="int" Nullable="false" />
+          <Property Name="Team_id" Type="int" />
+          <Property Name="IsAdmin" Type="bit" />
         </EntityType>
         <Association Name="FK_Games_Team1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
@@ -213,6 +215,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_id" Type="Int32" Nullable="false" />
           <Property Name="Game_id" Type="Int32" Nullable="false" />
+          <Property Name="Team_id" Type="Int32" />
+          <Property Name="IsAdmin" Type="Boolean" />
           <NavigationProperty Name="Games" Relationship="Self.FK_UserAndGamesPivot_Games" FromRole="UserAndGamesPivot" ToRole="Games" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserAndGamesPivot_User" FromRole="UserAndGamesPivot" ToRole="User" />
         </EntityType>
@@ -264,7 +268,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FootDbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FootballAppEntitiesTeamVersion" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="Self.Games" />
           <EntitySet Name="MainMenu" EntityType="Self.MainMenu" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -293,7 +297,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FootDbModelStoreContainer" CdmEntityContainer="FootDbEntities">
+        <EntityContainerMapping StorageEntityContainer="FootDbModelStoreContainer" CdmEntityContainer="FootballAppEntitiesTeamVersion">
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="FootDbModel.Games">
               <MappingFragment StoreEntitySet="Games">
@@ -360,6 +364,8 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="Game_id" ColumnName="Game_id" />
+                <ScalarProperty Name="Team_id" ColumnName="Team_id" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

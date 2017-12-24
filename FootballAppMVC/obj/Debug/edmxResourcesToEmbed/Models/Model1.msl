@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="FootDbModelStoreContainer" CdmEntityContainer="FootDbEntities">
+  <EntityContainerMapping StorageEntityContainer="FootDbModelStoreContainer" CdmEntityContainer="FootballAppEntitiesTeamVersion">
     <EntitySetMapping Name="Games">
       <EntityTypeMapping TypeName="FootDbModel.Games">
         <MappingFragment StoreEntitySet="Games">
@@ -67,6 +67,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />
           <ScalarProperty Name="Game_id" ColumnName="Game_id" />
+          <ScalarProperty Name="Team_id" ColumnName="Team_id" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

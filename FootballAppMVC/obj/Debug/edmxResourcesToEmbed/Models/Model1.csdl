@@ -68,6 +68,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="User_id" Type="Int32" Nullable="false" />
     <Property Name="Game_id" Type="Int32" Nullable="false" />
+    <Property Name="Team_id" Type="Int32" />
+    <Property Name="IsAdmin" Type="Boolean" />
     <NavigationProperty Name="Games" Relationship="Self.FK_UserAndGamesPivot_Games" FromRole="UserAndGamesPivot" ToRole="Games" />
     <NavigationProperty Name="User" Relationship="Self.FK_UserAndGamesPivot_User" FromRole="UserAndGamesPivot" ToRole="User" />
   </EntityType>
@@ -119,7 +121,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="FootDbEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="FootballAppEntitiesTeamVersion" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Games" EntityType="Self.Games" />
     <EntitySet Name="MainMenu" EntityType="Self.MainMenu" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />

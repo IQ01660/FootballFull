@@ -10,7 +10,7 @@ namespace FootballAppMVC.Controllers
 {
     public class HomeController : Controller
     {
-        FootDbEntities myTables = new FootDbEntities();
+        FootballAppEntitiesTeamVersion myTables = new FootballAppEntitiesTeamVersion();
         // GET: Home
         public ActionResult Index()
         {

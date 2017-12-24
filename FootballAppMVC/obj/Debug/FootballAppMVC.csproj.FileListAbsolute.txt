@@ -77,6 +77,6 @@ c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMV
 c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\bin\Microsoft.Owin.Security.Google.xml
 c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\bin\Microsoft.Owin.Security.Twitter.xml
 c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\obj\Debug\FootballAppMVC.csprojResolveAssemblyReference.cache
 c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\obj\Debug\FootballAppMVC.dll
 c:\users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\obj\Debug\FootballAppMVC.pdb
+C:\Users\home\documents\visual studio 2015\Projects\FootballAppMVC\FootballAppMVC\obj\Debug\FootballAppMVC.csprojResolveAssemblyReference.cache

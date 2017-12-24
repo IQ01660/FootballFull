@@ -13,7 +13,7 @@ namespace FootballAppMVC.Controllers
     }
     public class LoginController : Controller
     {
-        FootDbEntities myTables = new FootDbEntities();
+        FootballAppEntitiesTeamVersion myTables = new FootballAppEntitiesTeamVersion();
         // GET: Login
         public ActionResult EnterSystem()
         {
@@ -40,7 +40,7 @@ namespace FootballAppMVC.Controllers
             }
             else
             {
-                return HttpNotFound();
+                return RedirectToAction("IncorrectLogin","Error");
             }
 
             return RedirectToAction("Index","Home");

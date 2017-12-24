@@ -68,33 +68,35 @@
 </div>
 <!--Editing the game-->
 <style>
-    .addBtn a{
-        color:white;
+    .addBtn a {
+        color: white;
     }
+
     #editGame .container .row .col-xs-12 .gameInfo .gameTitle {
-        display:block;
+        display: block;
     }
+
     #editGame .container .row .col-xs-12 img {
-        width:38%;
-        margin-top:20px;
+        width: 38%;
+        margin-top: 20px;
     }
+
     #editGame .container .row .col-xs-12 .gameInfo .gameTitle div {
-        margin-top:20px;
-        display:inline-block;
-        font-size:1.8em;
+        margin-top: 20px;
+        display: inline-block;
+        font-size: 1.8em;
         background: #043687;
-        color:white;
+        color: white;
         font-family: 'Open Sans Condensed', sans-serif;
-        padding:10px 40px;
-        width:25%;
-        text-align:center;
+        padding: 10px 40px;
+        width: 25%;
+        text-align: center;
     }
 </style>
 <section id="editGame">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                @*<img class="pull-right" src="~/Images/pitch-clipart-football_pitch.jpg" alt="footballPitch" />*@
                 <div class="gameInfo">
                     <div class="gameTitle">
                         @foreach (var game in ViewBag.allGamesList)
@@ -105,19 +107,27 @@
                                 {
                                     if (game.Team1_id == team.Id)
                                     {
-                                        <div>@team.Name</div>
+                                        <div>1. @team.Name</div>
                                     }
                                 }
-                                
+
                                 foreach (var team in ViewBag.allTeamsList)
                                 {
                                     if (game.Team2_id == team.Id)
                                     {
-                                        <div>@team.Name</div>
+                                        <div>2. @team.Name</div>
                                     }
                                 }
+                                if (!(game.Score == null))
+                                {
+                                    <div>
+                                        Score: @game.Score
+                                    </div>
+                                }
+
                             }
                         }
+
                     </div>
                     <div class="players" style="margin-top:30px">
                         <section id="allPlayersTable">
@@ -125,10 +135,11 @@
                                 <table class="table">
                                     <thead>
                                         <tr style="color:white;background:#043687; font-family:'Open Sans Condensed', sans-serif; font-size:1.3em">
-                                            <th>Players</th>
+                                            <th>First Team Players</th>
                                             <th>Age</th>
                                             <th>Sex</th>
                                             <th>Email</th>
+                                            <th>Your Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,7 +151,7 @@
                                                 // finding correct users - players
                                                 foreach (var usersGames in ViewBag.allUsersGamesList)
                                                 {
-                                                    if (usersGames.Game_id == game.Id)
+                                                    if (usersGames.Game_id == game.Id && usersGames.Team_id == game.Team1_id)
                                                     {
                                                         foreach (var user in ViewBag.allUserList)
                                                         {
@@ -151,6 +162,14 @@
                                                                     <td>@user.Age</td>
                                                                     <td>@user.Sex</td>
                                                                     <td>@user.Email</td>
+                                                                    @if (usersGames.IsAdmin == true)
+                                                                    {
+                                                                        <td>Admin</td>
+                                                                    }
+                                                                    @if (usersGames.IsAdmin == false)
+                                                                    {
+                                                                        <td>Contact with Admin to get the address</td>
+                                                                    }
                                                                 </tr>
                                                             }
                                                         }
@@ -163,10 +182,103 @@
                             </div>
                         </section>
                     </div>
-                    <button class="btn btn-success addBtn">@Html.ActionLink("Add me to the gamelist","AddPlayer","Games")</button>
+                    <button class="btn btn-success addBtn">@Html.ActionLink("Add me to the gamelist", "AddPlayer", "Games",new { id = 1},null)</button>
+                    <div class="players" style="margin-top:30px">
+                        <section id="allPlayersTable">
+                            <div class="container" style="padding-left:0">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color:white;background:#043687; font-family:'Open Sans Condensed', sans-serif; font-size:1.3em">
+                                            <th>Second Team Players</th>
+                                            <th>Age</th>
+                                            <th>Sex</th>
+                                            <th>Email</th>
+                                            <th>Your Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var game in ViewBag.allGamesList)
+                                        {
+                                            // finding the correct game
+                                            if (game.Id == ViewBag.gameId)
+                                            {
+                                                // finding correct users - players in a team
+                                                foreach (var usersGames in ViewBag.allUsersGamesList)
+                                                {
+                                                    if (usersGames.Game_id == game.Id && usersGames.Team_id == game.Team2_id)
+                                                    {
+                                                        foreach (var user in ViewBag.allUserList)
+                                                        {
+                                                            if (user.Id == usersGames.User_id)
+                                                            {
+                                                                <tr>
+                                                                    <td>@user.Username</td>
+                                                                    <td>@user.Age</td>
+                                                                    <td>@user.Sex</td>
+                                                                    <td>@user.Email</td>
+                                                                    @if (usersGames.IsAdmin == true)
+                                                                    {
+                                                                        <td>Admin</td>
+                                                                    }
+                                                                    @if (usersGames.IsAdmin == false)
+                                                                    {
+                                                                        <td>Contact with Admin to get the address</td>
+                                                                    }
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="btn btn-success addBtn">@Html.ActionLink("Add me to the gamelist", "AddPlayer", "Games",new { id = 2},null)</button>
                 </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->
     </div> <!-- /.container -->
 </section>
 
+
+@*EDITING THE SCORE*@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            @foreach (var userGames in ViewBag.allUsersGamesList)
+            {
+                foreach (var user in ViewBag.allUserList)
+                {
+                    if (user.Username == ViewBag.curUser)
+                    {
+                        CurrentUserIdHolder.curUserId = user.Id;
+                        break;
+                    }
+                }
+                if (userGames.Game_id == ViewBag.gameId && userGames.User_id == CurrentUserIdHolder.curUserId)
+                {
+                    // checking if the score has already been submitted
+                    foreach (var game in ViewBag.allGamesList)
+                    {
+                        if (game.Id == userGames.Game_id && game.Score == null)
+                        {
+                            using (Html.BeginForm("EditGame", "Games", new { id = EditGameIdHolder.currentEditGameId }, FormMethod.Post, new { style = "margin-top:50px" }))
+                            {
+                                <div class="form-group">
+                                    <label for="score" class="sr-only">Email</label>
+                                    <input type="text" name="score" id="score" class="form-control" placeholder="For Example: 1-2">
+                                </div>
+
+                                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Submit Final Score of the Game">
+                            }
+                        }
+                    }
+                }
+            }
+        </div> <!-- /.col-xs-12 -->
+    </div> <!-- /.row -->
+</div> <!-- /.container -->

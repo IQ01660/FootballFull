@@ -13,10 +13,10 @@ namespace FootballAppMVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FootDbEntities : DbContext
+    public partial class FootballAppEntitiesTeamVersion : DbContext
     {
-        public FootDbEntities()
-            : base("name=FootDbEntities")
+        public FootballAppEntitiesTeamVersion()
+            : base("name=FootballAppEntitiesTeamVersion")
         {
         }
     

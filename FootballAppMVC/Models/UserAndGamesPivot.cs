@@ -17,6 +17,8 @@ namespace FootballAppMVC.Models
         public int Id { get; set; }
         public int User_id { get; set; }
         public int Game_id { get; set; }
+        public Nullable<int> Team_id { get; set; }
+        public Nullable<bool> IsAdmin { get; set; }
     
         public virtual Games Games { get; set; }
         public virtual User User { get; set; }

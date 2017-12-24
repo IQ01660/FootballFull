@@ -255,9 +255,14 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ball.jpg" />
+    <Content Include="Images\ball2.jpg" />
+    <Content Include="Images\ball3.jpg" />
     <Content Include="Images\boots.jpg" />
     <Content Include="Images\field.jpg" />
     <Content Include="Images\pitch-clipart-football_pitch.jpg" />
+    <Content Include="Images\santiago.jpg" />
+    <Content Include="Images\wanda.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -335,6 +340,9 @@
     <Content Include="Views\Games\NewGame.cshtml" />
     <Content Include="Views\Error\GoLogin.cshtml" />
     <Content Include="Views\Games\EditGame.cshtml" />
+    <Content Include="Views\Error\IncorrectLogin.cshtml" />
+    <Content Include="Views\Error\IncorrectSignUp.cshtml" />
+    <Content Include="Views\Register\SuccessfulSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
